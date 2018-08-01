@@ -28,13 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.listView);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                Intent appInfo = new Intent(MainActivity.this, PostActivity.class);
-                startActivity(appInfo);
-            }
-        });        getPosts();
+        getPosts();
     }
 
     void getPosts() {
