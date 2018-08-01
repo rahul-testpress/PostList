@@ -10,6 +10,4 @@ public interface API {
     @GET("api/v2.2/posts")
     Call<TestpressAPI> getPosts();
 
-    @GET("api/v2.2/posts/{slug}")
-    Call<Post> getPost(@Path("slug") String slug);
 }

@@ -13,15 +13,13 @@ import java.util.Date;
 import java.util.List;
 
 
-public class customAdapter extends ArrayAdapter<Post> {
-
-    customAdapter(Context context, List<Post> listOfPosts) {
+public class CustomAdapter extends ArrayAdapter<Post> {
+    CustomAdapter(Context context, List<Post> listOfPosts) {
         super(context, 0, listOfPosts);
     }
 
     @NonNull
     @Override
-
     public View getView(int position, View view, @NonNull ViewGroup parent) {
 
         String timeAgo;
@@ -32,12 +30,9 @@ public class customAdapter extends ArrayAdapter<Post> {
         final long WEEK_MILLIS = 7 * DAY_MILLIS;
         final long MONTHS_MILLIS = 4 * WEEK_MILLIS;
         final long YEARS_MILLIS = 12 * MONTHS_MILLIS;
-
         Post post = getItem(position);
         if (view == null) {
-
             view = LayoutInflater.from(getContext()).inflate(R.layout.list_layout, parent, false);
-
         }
         TextView titleView = view.findViewById(R.id.title);
         titleView.setText(post.getTitle());
@@ -74,7 +69,6 @@ public class customAdapter extends ArrayAdapter<Post> {
 
         TextView dateView = view.findViewById(R.id.date_created);
         dateView.setText(timeAgo);
-
         return view;
 
     }

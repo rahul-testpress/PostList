@@ -19,28 +19,25 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    ListView listView;
-    private customAdapter m_adapter;
+
+    private ListView listView;
+    private CustomAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.listView);
-        singleclicklistener();
-        getResults();
-    }
-
-    private void singleclicklistener(){
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                 Intent appInfo = new Intent(MainActivity.this, PostActivity.class);
                 startActivity(appInfo);
-                 }
-        });
+            }
+        });        getPosts();
     }
 
-    void getResults() {
+    void getPosts() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
@@ -55,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<TestpressAPI> call, @NonNull Response<TestpressAPI> response) {
                 List<Post> postList = response.body().getResults();
-                m_adapter = new customAdapter(MainActivity.this,postList);
-                listView.setAdapter(m_adapter);
+                mAdapter = new CustomAdapter(MainActivity.this, postList);
+                listView.setAdapter(mAdapter);
             }
             @Override
             public void onFailure(@NonNull Call<TestpressAPI> call, @NonNull Throwable t) {
