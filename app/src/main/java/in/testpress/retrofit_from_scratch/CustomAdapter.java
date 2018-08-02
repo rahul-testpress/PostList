@@ -14,6 +14,7 @@ import java.util.List;
 
 
 public class CustomAdapter extends ArrayAdapter<Post> {
+
     CustomAdapter(Context context, List<Post> listOfPosts) {
         super(context, 0, listOfPosts);
     }
@@ -70,7 +71,6 @@ public class CustomAdapter extends ArrayAdapter<Post> {
         TextView dateView = view.findViewById(R.id.date_created);
         dateView.setText(timeAgo);
         return view;
-
     }
 
 }
