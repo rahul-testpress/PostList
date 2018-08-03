@@ -10,7 +10,7 @@ public final class DateUtil {
 
         String timeAgo;
         long dateNowInMillis = System.currentTimeMillis();
-        Date date= null;
+        Date date;
 
         try {
             date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")

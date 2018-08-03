@@ -24,13 +24,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         listView = findViewById(R.id.listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(MainActivity.this, PostActivity.class);
-                Post post = mAdapter.getItem(position);
-                intent.putExtra(EXTRA_POST, post);
+                intent.putExtra(EXTRA_POST, mAdapter.getItem(position));
                 startActivity(intent);
             }
         });

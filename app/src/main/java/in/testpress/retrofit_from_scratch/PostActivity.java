@@ -12,15 +12,14 @@ import retrofit2.Response;
 
 public class PostActivity extends AppCompatActivity {
 
-    private WebView webView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         setContentView(R.layout.activity_post);
+
         Post post = getIntent().getParcelableExtra(MainActivity.EXTRA_POST);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TextView textView = findViewById(R.id.postTitleView);
         textView.setText(post.getTitle());
@@ -29,7 +28,7 @@ public class PostActivity extends AppCompatActivity {
         textView.setText(post.getSummary());
 
         String timeAgo = DateUtil.getDateAbbreviatedInAgo(post.getPublishedDate());
-        textView = findViewById(R.id.postDateCreatedView);
+        textView = findViewById(R.id.postCreatedDateView);
         textView.setText(timeAgo);
 
         Call<Post> call = NetworkUtil.retrofitBuilder().getPost(post.getSlug());
@@ -37,6 +36,7 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<Post> call, @NonNull Response<Post> response) {
                 String contentHtml = response.body().getContentHtml();
+                WebView webView;
                 webView = findViewById(R.id.webView);
                 webView.loadData(contentHtml, "text/html", "UTF-8");
             }

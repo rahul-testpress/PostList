@@ -42,9 +42,8 @@
                     android:textSize="15sp"
                     android:textColor="@color/colorSummary"/>
 
-
                 <TextView
-                    android:id="@+id/postDateCreatedView"
+                    android:id="@+id/postCreatedDateView"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
