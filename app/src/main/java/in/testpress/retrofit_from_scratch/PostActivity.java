@@ -36,8 +36,7 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<Post> call, @NonNull Response<Post> response) {
                 String contentHtml = response.body().getContentHtml();
-                WebView webView;
-                webView = findViewById(R.id.webView);
+                WebView webView = findViewById(R.id.webView);
                 webView.loadData(contentHtml, "text/html", "UTF-8");
             }
             @Override
