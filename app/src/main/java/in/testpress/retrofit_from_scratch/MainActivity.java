@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView listView;
     private CustomAdapter mAdapter;
+    public static final String EXTRA_POST = "EXTRA_POST";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +27,11 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                Intent appInfo = new Intent(MainActivity.this, PostActivity.class);
-                Post post = mAdapter.getItem(pos);
-                appInfo.putExtra("Post", post);
-                    startActivity(appInfo);
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Intent intent = new Intent(MainActivity.this, PostActivity.class);
+                Post post = mAdapter.getItem(position);
+                intent.putExtra(EXTRA_POST, post);
+                startActivity(intent);
             }
         });
         getPosts();

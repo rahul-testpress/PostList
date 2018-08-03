@@ -12,10 +12,7 @@ import retrofit2.Response;
 
 public class PostActivity extends AppCompatActivity {
 
-    public TextView textView;
-    public WebView webView;
-    String timeAgo;
-    String slug;
+    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,29 +20,25 @@ public class PostActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setContentView(R.layout.activity_post);
-        Post post = getIntent().getParcelableExtra("Post");
+        Post post = getIntent().getParcelableExtra(MainActivity.EXTRA_POST);
 
-        String title = post.getTitle();
-        textView = findViewById(R.id.postTitleView);
-        textView.setText(title);
+        TextView textView = findViewById(R.id.postTitleView);
+        textView.setText(post.getTitle());
 
-        String summary = post.getSummary();
         textView = findViewById(R.id.postSummaryView);
-        textView.setText(summary);
+        textView.setText(post.getSummary());
 
-        String publishedDate = post.getPublishedDate();
-        timeAgo = DateUtil.dateAbbreviatedInAgo(publishedDate);
+        String timeAgo = DateUtil.getDateAbbreviatedInAgo(post.getPublishedDate());
         textView = findViewById(R.id.postDateCreatedView);
         textView.setText(timeAgo);
 
-        slug = post.getSlug();
-        Call<Post> call = NetworkUtil.retrofitBuilder().getPost(slug);
+        Call<Post> call = NetworkUtil.retrofitBuilder().getPost(post.getSlug());
         call.enqueue(new Callback<Post>() {
             @Override
             public void onResponse(@NonNull Call<Post> call, @NonNull Response<Post> response) {
-            String contentHtml = response.body().getContentHtml();
-            webView = findViewById(R.id.webView);
-            webView.loadData(contentHtml, "text/html", "UTF-8");
+                String contentHtml = response.body().getContentHtml();
+                webView = findViewById(R.id.webView);
+                webView.loadData(contentHtml, "text/html", "UTF-8");
             }
             @Override
             public void onFailure(@NonNull Call<Post> call, @NonNull Throwable t) {

@@ -6,21 +6,22 @@ import java.util.Date;
 
 public final class DateUtil {
 
-    public static String dateAbbreviatedInAgo(String publishedDateString){
+    public static String getDateAbbreviatedInAgo(String inputDateString){
 
         String timeAgo;
         long dateNowInMillis = System.currentTimeMillis();
-        Date publishedDateInMillis= null;
+        Date date= null;
 
         try {
-            publishedDateInMillis = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-                    .parse(publishedDateString);
+            date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                    .parse(inputDateString);
         } catch (ParseException e) {
             e.printStackTrace();
+            return null;
         }
 
-        long millis = publishedDateInMillis.getTime();
-        final long diff = dateNowInMillis - millis;
+        long givenMillis = date.getTime();
+        final long diff = dateNowInMillis - givenMillis;
 
         int SECOND_MILLIS = 1000;
         int MINUTE_MILLIS = 60 * SECOND_MILLIS;
@@ -41,8 +42,8 @@ public final class DateUtil {
         else if (diff < 4 * WEEK_MILLIS) timeAgo =  diff / WEEK_MILLIS + " weeks ago";
         else if (diff < 2 * MONTHS_MILLIS) timeAgo =  diff / MONTHS_MILLIS + " month ago";
         else if (diff < 12 * MONTHS_MILLIS) timeAgo =  diff / MONTHS_MILLIS + " months ago";
-        else if (diff < 2 * YEARS_MILLIS) timeAgo =  diff / YEARS_MILLIS + " Year ago";
-        else timeAgo = diff/ YEARS_MILLIS + " years ago";
+        else if (diff < 2 * YEARS_MILLIS) timeAgo =  diff / YEARS_MILLIS + " year ago";
+        else timeAgo = diff / YEARS_MILLIS + " years ago";
 
         return timeAgo;
     }

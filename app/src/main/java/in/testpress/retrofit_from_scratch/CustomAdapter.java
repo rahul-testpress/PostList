@@ -33,7 +33,7 @@ public class CustomAdapter extends ArrayAdapter<Post> {
         TextView summaryView = view.findViewById(R.id.summary);
         summaryView.setText(post.getSummary());
 
-        timeAgo = DateUtil.dateAbbreviatedInAgo(post.getPublishedDate());
+        timeAgo = DateUtil.getDateAbbreviatedInAgo(post.getPublishedDate());
         TextView dateView = view.findViewById(R.id.date_created);
         dateView.setText(timeAgo);
         return view;
