@@ -17,7 +17,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ListView listView;
-    private CustomAdapter mAdapter;
+    private PostListAdapter mAdapter;
     public static final String EXTRA_POST = "EXTRA_POST";
 
     @Override
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<TestpressAPI> call, @NonNull Response<TestpressAPI> response) {
                 List<Post> postList = response.body().getResults();
-                mAdapter = new CustomAdapter(MainActivity.this, postList);
+                mAdapter = new PostListAdapter(MainActivity.this, postList);
                 listView.setAdapter(mAdapter);
             }
             @Override

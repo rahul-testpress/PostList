@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class CustomAdapter extends ArrayAdapter<Post> {
+public class PostListAdapter extends ArrayAdapter<Post> {
 
-    CustomAdapter(Context context, List<Post> listOfPosts) {
+    PostListAdapter(Context context, List<Post> listOfPosts) {
         super(context, 0, listOfPosts);
     }
 
